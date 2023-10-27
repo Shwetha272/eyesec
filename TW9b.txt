@@ -1,0 +1,22 @@
+import openpyxl as xl
+fh = xl.load_workbook("info.xlsx")
+sh = fh.active
+for i in range(2, sh.max_row+1):
+    rno = sh.cell(row=i, column=1).value
+    name = sh.cell(row=i, column=2).value
+    marks = sh.cell(row=i, column=3).value
+    print(rno, name, marks)
+rno = int(input("Enter rollnumber whose marks are tobe changed:"))
+new_marks = int(input("Enter the new marks:"))
+for i in range(2, sh.max_row+1):
+    if sh.cell(row=i, column=1).value == rno:
+        sh.cell(row=i, column=3, value=new_marks)
+        fh.save('info.xlsx')
+        break
+print("New student entry:")
+rno = int(input("Enter roll number:"))
+name = input("Enter the name:")
+marks = int(input("Enter the marks:"))
+sh.append([rno, name, marks])
+fh.save('info.xlsx')
+fh.close()
